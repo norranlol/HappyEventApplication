@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:layout_gravity="fill_horizontal">
+        
+        <TextView
+        	android:id="@+id/textViewWhomBirthday"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_margin="20dip"
+        	android:textSize="20sp"
+        	android:layout_gravity="center_horizontal"
+        	android:text="@string/whom_birthday"/>
+
+        <EditText
+            android:id="@+id/editTextOfWhomBirthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:textSize="20sp" >
+
+            <requestFocus />
+        </EditText>
+        
+        <TextView
+        	android:id="@+id/TextViewDateOfBirth"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_margin="20dip"
+        	android:textSize="20sp"
+        	android:layout_gravity="center_horizontal"
+        	android:text="@string/date_of_birthday"/>
+            
+        <EditText
+            android:id="@+id/editTextOfDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20sp"
+            android:layout_gravity="fill_horizontal"
+            android:inputType="date" >
+            <requestFocus />
+        </EditText>
+        
+        <TextView
+        android:id="@+id/textViewCommentary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/label_commentary"/>
+
+        <EditText
+            android:id="@+id/editTextOfCommentaryBirthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20sp"
+            android:layout_gravity="fill_horizontal"
+            android:inputType="textMultiLine" >
+            <requestFocus />
+        </EditText>
+        
+        <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="20dip"
+	        android:textSize="12sp"
+	        android:layout_gravity="center_horizontal"
+	        android:text=""/>
+    	
+        <Button
+            android:id="@+id/buttonAddEventBirthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:text="@string/button_add_title" />
+        
+    </LinearLayout>
+</ScrollView>

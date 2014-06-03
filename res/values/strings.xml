@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HappyEvent</string>
+    <string name="list_of_events_page">Список событий</string>
+    <string name="action_settings">Настройки</string>
+	<string name="add_event">Добавить событие</string>
+	<string name="add_event_page">Добавление события</string>
+	<string name="button_add_title">Добавить</string>
+	<string name="label_commentary">Комментарий:</string>
+	<string name="whom_birthday">Чье?</string>
+	<string name="date_of_birthday">Дата Рождения:</string>
+	<string name="whom_demobee">Чей?</string>
+	<string name="date_of_demobee">Дата Дембеля:</string>
+	<string name="title_of_event">Название:</string>
+	<string name="date_of_event">Дата:</string>
+	<string name="not_enter_whom_birthday">Не заполнено поле "Чье"</string>
+	<string name="not_enter_date_of_birth">Не заполнено поле "Дата Рождения"</string>
+	<string name="not_enter_whom_demobee">Не заполнено поле "Чей"</string>
+	<string name="not_enter_date_of_demobee">Не заполнено поле "Дата Дембеля"</string>
+	<string name="not_enter_title_of_event">Не заполнено поле "Название"</string>
+	<string name="not_enter_date_of_event">Не заполнено поле "Дата"</string>
+	<string name="not_enter_type_of_holiday">Не выбран праздник</string>
+</resources>
