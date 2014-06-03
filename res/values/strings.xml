@@ -20,4 +20,13 @@
 	<string name="not_enter_title_of_event">Не заполнено поле "Название"</string>
 	<string name="not_enter_date_of_event">Не заполнено поле "Дата"</string>
 	<string name="not_enter_type_of_holiday">Не выбран праздник</string>
+    <string name="date_not_matching_mask">Дата не соответствует маске ЧЧ-ММ-ГГГГ</string>
+    <string name="date_not_valid_means">Введены несуществующие значения года, месяца, дня</string>
+    <string name="date_later_then_current">Дата Рождения не может быть позже текущей даты</string>
+    <string name="field_whom_too_long">Поле "Чье" не может быть более 100 символов</string>
+    <string name="field_commentary_too_long">Поле "Комментарий" не может быть более 500 символов</string>
+    <string name="field_whom2_too_long">Поле "Чей" не может быть более 100 символов</string>
+    <string name="date_earlier_then_current">Дата Дембеля не может быть раньше текущей даты</string>
+    <string name="field_title_too_long">Поле "Название" не может быть более 40 символов</string>
+    <string name="date_earlier_then_current2">Дата не может быть раньше текущей даты</string>
 </resources>

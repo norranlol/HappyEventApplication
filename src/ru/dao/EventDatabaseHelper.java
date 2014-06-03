@@ -9,7 +9,7 @@ import android.util.Log;
 public class EventDatabaseHelper extends SQLiteOpenHelper {
 
 	//БД
-	private static final String DATABASE_NAME = "eventdatab2.db";
+	private static final String DATABASE_NAME = "events.db";
 	private static final int DATABASE_VERSION = 1;
 	
 	//Таблицы
@@ -53,28 +53,32 @@ public class EventDatabaseHelper extends SQLiteOpenHelper {
                     " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			        + WHOM + " VARCHAR(100) NOT NULL,"
                     + DATE_OF_BIRTH + " VARCHAR(10) NOT NULL,"
-                    + EVENT_ID + " INTEGER NOT NULL);";
+                    + EVENT_ID + " INTEGER NOT NULL," +
+                    "FOREIGN KEY(" + EVENT_ID + ") REFERENCES " + EVENT_TABLE_NAME + "(" + UID + ")" + ");";
 
     private static final String SQL_CREATE_TABLE_DEMOBEE =
             "CREATE TABLE " + DEMOBEE_TABLE_NAME +
                     " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + WHOM + " VARCHAR(100) NOT NULL,"
                     + DATE_OF_DEMOBEE + " VARCHAR(10) NOT NULL,"
-                    + EVENT_ID + " INTEGER NOT NULL);";
+                    + EVENT_ID + " INTEGER NOT NULL," +
+                    "FOREIGN KEY(" + EVENT_ID + ") REFERENCES " + EVENT_TABLE_NAME + "(" + UID + ")" + ");";
 
     private static final String SQL_CREATE_TABLE_HOLIDAY =
             "CREATE TABLE " + HOLIDAY_TABLE_NAME +
                     " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                        + TYPE_OF_HOLIDAY + " VARCHAR(40) NOT NULL,"
                        + DATE_OF_HOLIDAY + " VARCHAR(10) NOT NULL,"
-                       + EVENT_ID + " INTEGER NOT NULL);";
+                        + EVENT_ID + " INTEGER NOT NULL," +
+                        "FOREIGN KEY(" + EVENT_ID + ") REFERENCES " + EVENT_TABLE_NAME + "(" + UID + ")" + ");";
 
     private static final String SQL_CREATE_TABLE_CUSTOMEVENT =
             "CREATE TABLE " + CUSTOMEVENT_TABLE_NAME +
                     " ("  + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + TITLE + " VARCHAR(40) NOT NULL,"
                     + DATE_OF_CUSTOMEVENT + " VARCHAR(10) NOT NULL,"
-                    + EVENT_ID + " INTEGER NOT NULL);";
+                    + EVENT_ID + " INTEGER NOT NULL," +
+                    "FOREIGN KEY(" + EVENT_ID + ") REFERENCES " + EVENT_TABLE_NAME + "(" + UID + ")" + ");";
 
 	private static final String SQL_DELETE_ENTRIES_EVENT = "DROP TABLE IF EXISTS "
 			+ EVENT_TABLE_NAME;

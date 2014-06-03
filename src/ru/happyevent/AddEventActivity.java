@@ -26,6 +26,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import ru.date.DateValidator;
 import ru.model.Holiday;
 
 public class AddEventActivity extends ActionBarActivity {
@@ -43,6 +44,7 @@ public class AddEventActivity extends ActionBarActivity {
 	private EventDatabaseHelper eventDBHelper;
 	private SQLiteDatabase sqldb;
 	private EventDAO eventDAO = new EventDAO();
+    private DateValidator dateValidator = new DateValidator();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -131,10 +133,25 @@ public class AddEventActivity extends ActionBarActivity {
 				if (whomString.equals(""))
 					Toast.makeText(AddEventActivity.this, R.string.not_enter_whom_birthday, 
 							Toast.LENGTH_LONG).show();
+                else if (whomString.length() > 100)
+                    Toast.makeText(AddEventActivity.this, R.string.field_whom_too_long,
+                            Toast.LENGTH_LONG).show();
 				else if (date.equals(""))
 					Toast.makeText(AddEventActivity.this, R.string.not_enter_date_of_birth, 
 							Toast.LENGTH_LONG).show();
-				else if ( (!whomString.equals("")) && (!date.equals(""))){
+                else if (!dateValidator.validateDateOnMask(date))
+                    Toast.makeText(AddEventActivity.this, R.string.date_not_matching_mask,
+                            Toast.LENGTH_LONG).show();
+                else if (!dateValidator.validateDatesOnValidMeans(date))
+                    Toast.makeText(AddEventActivity.this, R.string.date_not_valid_means,
+                            Toast.LENGTH_LONG).show();
+                else if (!dateValidator.ifDateIsEarlierThenCurrent(date))
+                    Toast.makeText(AddEventActivity.this, R.string.date_later_then_current,
+                            Toast.LENGTH_LONG).show();
+                else if (commentary.length() > 500)
+                    Toast.makeText(AddEventActivity.this, R.string.field_commentary_too_long,
+                            Toast.LENGTH_LONG).show();
+				else if ((!whomString.equals("")) && (!date.equals(""))){
 					eventDAO.insertInBirthdayTable("День Рождения", commentary, whomString, date, sqldb);
                     whomEditText.setText("");
                     dateEditText.setText("");
@@ -171,9 +188,24 @@ public class AddEventActivity extends ActionBarActivity {
 					if (whomString.equals(""))
 						Toast.makeText(AddEventActivity.this, R.string.not_enter_whom_demobee, 
 								Toast.LENGTH_LONG).show();
+                    else if (whomString.length() > 100)
+                        Toast.makeText(AddEventActivity.this, R.string.field_whom2_too_long,
+                                Toast.LENGTH_LONG).show();
 					else if (date.equals(""))
 						Toast.makeText(AddEventActivity.this, R.string.not_enter_date_of_demobee, 
 								Toast.LENGTH_LONG).show();
+                    else if (!dateValidator.validateDateOnMask(date))
+                        Toast.makeText(AddEventActivity.this, R.string.date_not_matching_mask,
+                                Toast.LENGTH_LONG).show();
+                    else if (!dateValidator.validateDatesOnValidMeans(date))
+                        Toast.makeText(AddEventActivity.this, R.string.date_not_valid_means,
+                                Toast.LENGTH_LONG).show();
+                    else if (!dateValidator.ifDateIsLaterThenCurrent(date))
+                        Toast.makeText(AddEventActivity.this, R.string.date_earlier_then_current,
+                                Toast.LENGTH_LONG).show();
+                    else if (commentary.length() > 500)
+                        Toast.makeText(AddEventActivity.this, R.string.field_commentary_too_long,
+                                Toast.LENGTH_LONG).show();
 					else if ( (!whomString.equals("")) && (!date.equals(""))){
                         eventDAO.insertInDemobeeTable("Дембель", commentary, whomString, date, sqldb);
                         whomEditText.setText("");
@@ -221,8 +253,22 @@ public class AddEventActivity extends ActionBarActivity {
 					String commentary = commentaryEditText.getText().toString();
 					if (title.equals(""))
 						Toast.makeText(AddEventActivity.this, R.string.not_enter_title_of_event, Toast.LENGTH_LONG).show();
+                    else if (title.length() > 40)
+                        Toast.makeText(AddEventActivity.this, R.string.field_title_too_long, Toast.LENGTH_LONG).show();
 					else if (date.equals(""))
 						Toast.makeText(AddEventActivity.this, R.string.not_enter_date_of_event, Toast.LENGTH_LONG).show();
+                    else if (!dateValidator.validateDateOnMask(date))
+                        Toast.makeText(AddEventActivity.this, R.string.date_not_matching_mask,
+                                Toast.LENGTH_LONG).show();
+                    else if (!dateValidator.validateDatesOnValidMeans(date))
+                        Toast.makeText(AddEventActivity.this, R.string.date_not_valid_means,
+                                Toast.LENGTH_LONG).show();
+                    else if (!dateValidator.ifDateIsLaterThenCurrent(date))
+                        Toast.makeText(AddEventActivity.this, R.string.date_earlier_then_current2,
+                                Toast.LENGTH_LONG).show();
+                    else if (commentary.length() > 500)
+                        Toast.makeText(AddEventActivity.this, R.string.field_commentary_too_long,
+                                Toast.LENGTH_LONG).show();
 					else if ( (!title.equals("")) && (!date.equals("")) ){
                         eventDAO.insertInCustomEventTable("Другое Событие", commentary, title, date, sqldb);
                         titleEditText.setText("");
@@ -280,12 +326,15 @@ public class AddEventActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				Spinner spinner = (Spinner) findViewById(R.id.spinnerOfHolidayEvent);
 				long position = spinner.getSelectedItemId();
+                commentaryEditText = (EditText) findViewById(R.id.editTextOfCommentaryOfHoliday);
+                String commentary = commentaryEditText.getText().toString();
 				if (position == 0)
 					Toast.makeText(AddEventActivity.this, R.string.not_enter_type_of_holiday, 
 							Toast.LENGTH_LONG).show();
+                else if (commentary.length() > 500)
+                    Toast.makeText(AddEventActivity.this, R.string.field_commentary_too_long,
+                            Toast.LENGTH_LONG).show();
 				else if (position != 0){
-                    commentaryEditText = (EditText) findViewById(R.id.editTextOfCommentaryOfHoliday);
-                    String commentary = commentaryEditText.getText().toString();
                     String selectedItemTitle = spinner.getSelectedItem().toString();
                     Holiday holidayHelper = new Holiday();
                     String dateOfHoliday = holidayHelper.getDateOfHolidayByTitleOfHoliday(selectedItemTitle);

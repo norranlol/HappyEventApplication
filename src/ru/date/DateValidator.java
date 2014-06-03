@@ -1,24 +1,60 @@
 package ru.date;
 
+import org.joda.time.DateTime;
+
 import java.util.GregorianCalendar;
+import java.util.regex.Pattern;
 
 public class DateValidator {
+
+    public boolean validateDateOnMask(String date){
+        String[] masDate = date.split(Pattern.quote("-"));
+        if (masDate.length != 3) return false;
+        if (masDate[0].length() != 2) return false;
+        if (masDate[1].length() != 2) return false;
+        if (masDate[2].length() != 4) return false;
+        return true;
+    }
 	
-	public boolean validateDatesOnValidMeans(int year, int month, int day, int hour, int minute){
-		if ((year < 2000) || (year > 3000)) 
+	public boolean validateDatesOnValidMeans(String date){
+        String[] masDate = date.split(Pattern.quote("-"));
+        int day = Integer.parseInt(masDate[0]);
+        int month = Integer.parseInt(masDate[1]);
+        int year = Integer.parseInt(masDate[2]);
+		if ((year < 1900) || (year > 3000))
 			return false;
 		if ((month < 1) || (month > 12))
 			return false;
 		if ((day < 1) || (day > 31))
 			return false;
-		if ((hour < 0) || (hour > 23))
-			return false;
-		if ((minute < 0) || (minute > 60))
-			return false;
 		if (!validateOnMonthAndDays(year, month, day))
 			return false;
 		return true;
 	}
+
+    public boolean ifDateIsEarlierThenCurrent(String date){
+        String[] masDate = date.split(Pattern.quote("-"));
+        int day = Integer.parseInt(masDate[0]);
+        int month = Integer.parseInt(masDate[1]);
+        int year = Integer.parseInt(masDate[2]);
+        DateTime dateTime = new DateTime(year,month,day,0,0);
+        if (dateTime.isBefore(DateTime.now()))
+            return true;
+        return false;
+    }
+
+    public boolean ifDateIsLaterThenCurrent(String date){
+        String[] masDate = date.split(Pattern.quote("-"));
+        int day = Integer.parseInt(masDate[0]);
+        int month = Integer.parseInt(masDate[1]);
+        int year = Integer.parseInt(masDate[2]);
+        DateTime dateTime = new DateTime(year,month,day,0,0);
+        if (dateTime.isAfter(DateTime.now()))
+            return true;
+        return false;
+    }
+
+
 	
 	private boolean validateOnMonthAndDays(int year, int month, int day){
 		switch (month) {
