@@ -1,40 +1,37 @@
 package ru.happyevent;
 
+import android.app.ListActivity;
+import android.widget.ArrayAdapter;
+import android.widget.SimpleAdapter;
 import ru.dao.EventDAO;
 import ru.dao.EventDatabaseHelper;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import ru.model.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class ListOfEventsActivity extends ActionBarActivity {
+public class ListOfEventsActivity extends ListActivity {
 	
 	private EventDatabaseHelper eventDBHelper;
     private EventDAO eventDAO = new EventDAO();
 	private SQLiteDatabase sqldb;
+    private List<Event> listOfEvents = new ArrayList<Event>();
+    private SimpleAdapter sa;
+    ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_events);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
         
 		eventDBHelper = new EventDatabaseHelper(this);
 		sqldb = eventDBHelper.getWritableDatabase();
@@ -42,7 +39,6 @@ public class ListOfEventsActivity extends ActionBarActivity {
 		Cursor cursor = sqldb.query(EventDatabaseHelper.EVENT_TABLE_NAME, new String[] 
 				{EventDatabaseHelper.UID, EventDatabaseHelper.EVENTTYPE, EventDatabaseHelper.COMMENTARY},
 				null, null, null, null, null);
-        List<Event> listOfEvents = new ArrayList<Event>();
         while (cursor.moveToNext()){
         	int id = cursor.getInt(cursor.getColumnIndex(EventDatabaseHelper.UID));
         	String type = cursor.getString(cursor.getColumnIndex(EventDatabaseHelper.EVENTTYPE));
@@ -68,12 +64,31 @@ public class ListOfEventsActivity extends ActionBarActivity {
             listOfEvents.add(event);
         	Log.i("INFO", "ROW " + id + " HAS Type " + type + " HAS Commentary " + commentary);
         }
+
+        HashMap<String,String> item;
+        for (Event event : listOfEvents){
+            item = new HashMap<String, String>();
+            item.put("line1", event.getType());
+            if (event.getBirthday() != null)
+                item.put("line2", event.getBirthday().getWhom());
+            else if (event.getDemobee() != null)
+                item.put("line2", event.getDemobee().getWhom());
+            else if (event.getCustomEvent() != null)
+                item.put("line2", event.getCustomEvent().getTitle());
+            else if (event.getHoliday() != null)
+                item.put("line2", event.getHoliday().getType());
+            list.add(item);
+        }
+
+        sa = new SimpleAdapter(this, list, android.R.layout.two_line_list_item ,
+             new String[] { "line1","line2" },
+             new int[] {android.R.id.text1, android.R.id.text2});
+        setListAdapter( sa );
         cursor.close();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.list_of_events, menu);
         return true;
     }
@@ -87,21 +102,4 @@ public class ListOfEventsActivity extends ActionBarActivity {
     	}
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_list_of_events, container, false);
-            return rootView;
-        }
-    }
-
 }

@@ -29,4 +29,5 @@
     <string name="date_earlier_then_current">Дата Дембеля не может быть раньше текущей даты</string>
     <string name="field_title_too_long">Поле "Название" не может быть более 40 символов</string>
     <string name="date_earlier_then_current2">Дата не может быть раньше текущей даты</string>
+    <string name="list_of_events">Список событий</string>
 </resources>
