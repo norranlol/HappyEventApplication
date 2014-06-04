@@ -1,12 +1,11 @@
 package ru.happyevent;
 
 import android.app.ListActivity;
-import android.widget.ArrayAdapter;
-import android.widget.SimpleAdapter;
+import android.content.Intent;
+import android.view.View;
+import android.widget.*;
 import ru.dao.EventDAO;
 import ru.dao.EventDatabaseHelper;
-import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -65,6 +64,8 @@ public class ListOfEventsActivity extends ListActivity {
         	Log.i("INFO", "ROW " + id + " HAS Type " + type + " HAS Commentary " + commentary);
         }
 
+        cursor.close();
+
         HashMap<String,String> item;
         for (Event event : listOfEvents){
             item = new HashMap<String, String>();
@@ -83,9 +84,62 @@ public class ListOfEventsActivity extends ListActivity {
         sa = new SimpleAdapter(this, list, android.R.layout.two_line_list_item ,
              new String[] { "line1","line2" },
              new int[] {android.R.id.text1, android.R.id.text2});
-        setListAdapter( sa );
-        cursor.close();
+        setListAdapter(sa);
+
+        ListView listView = getListView();
+        listView.setTextFilterEnabled(true);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent showSingleIntent = new Intent(ListOfEventsActivity.this, ShowSingleEventActivity.class);
+                HashMap<String, String> item = (HashMap<String, String>) parent.getItemAtPosition(position);
+                String type = item.get("line1");
+                int eventId = 0;
+                if (type.equals("День Рождения")){
+                    String whom = item.get("line2");
+                    for (Event event : listOfEvents){
+                        if (event.getBirthday() != null){
+                            if (event.getBirthday().getWhom().equals(whom))
+                                eventId = event.getBirthday().getEvent_ID();
+                        }
+                    }
+                } else if (type.equals("Дембель")){
+                    String whom = item.get("line2");
+                    for (Event event : listOfEvents){
+                        if (event.getDemobee() != null){
+                            if (event.getDemobee().getWhom().equals(whom))
+                                eventId = event.getDemobee().getEvent_ID();
+                        }
+                    }
+                } else if (type.equals("Другое Событие")){
+                    String title = item.get("line2");
+                    for (Event event : listOfEvents){
+                        if (event.getCustomEvent() != null){
+                            if (event.getCustomEvent().getTitle().equals(title))
+                                eventId = event.getCustomEvent().getEvent_ID();
+                        }
+                    }
+                } else if (type.equals("Праздник")){
+                    String typeOfHoliday = item.get("line2");
+                    for (Event event : listOfEvents){
+                        if (event.getHoliday() != null){
+                            if (event.getHoliday().getType().equals(typeOfHoliday))
+                                eventId = event.getHoliday().getEvent_ID();
+                        }
+                    }
+                }
+                showSingleIntent.putExtra("type", type);
+                if (eventId != 0)
+                    showSingleIntent.putExtra("id", String.valueOf(eventId));
+                else
+                    showSingleIntent.putExtra("id", " ");
+                startActivity(showSingleIntent);
+            }
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

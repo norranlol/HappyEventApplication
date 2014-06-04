@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="fill_horizontal">
+
+        <TextView android:id="@+id/titleHoliday"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="40dip"
+                  android:textSize="20sp"
+                  android:layout_gravity="center_horizontal"
+                  android:text="@string/type_event_holiday"
+                  android:textColor="@android:color/holo_orange_dark"
+                />
+
+        <TextView
+                android:id="@+id/textViewTypeOfHolidayOutputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/which_type_of_holiday"
+                android:textColor="@android:color/holo_blue_dark"
+                />
+
+        <TextView
+                android:id="@+id/textViewTypeOfHolidayOutputField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                />
+
+        <TextView
+                android:id="@+id/textViewShowCommentaryOfHolidayLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dip"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/label_commentary"
+                android:textColor="@android:color/holo_blue_dark"
+                />
+
+        <TextView
+                android:id="@+id/textViewShowCommentaryOfHolidayField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text=""/>
+
+    </LinearLayout>
+ </ScrollView>

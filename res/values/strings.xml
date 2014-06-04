@@ -30,4 +30,9 @@
     <string name="field_title_too_long">Поле "Название" не может быть более 40 символов</string>
     <string name="date_earlier_then_current2">Дата не может быть раньше текущей даты</string>
     <string name="list_of_events">Список событий</string>
+    <string name="type_event_birthday">День Рождения</string>
+    <string name="type_event_demobee">Дембель</string>
+    <string name="type_event_customevent">Другое событие</string>
+    <string name="type_event_holiday">Праздник</string>
+    <string name="which_type_of_holiday">Какой?</string>
 </resources>

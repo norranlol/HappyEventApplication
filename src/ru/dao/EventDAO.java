@@ -3,10 +3,7 @@ package ru.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import ru.model.Birthday;
-import ru.model.CustomEvent;
-import ru.model.Demobee;
-import ru.model.Holiday;
+import ru.model.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -148,5 +145,19 @@ public class EventDAO {
         return null;
     }
 
-
+    public Event selectEventByEventId(int id, SQLiteDatabase sqldb){
+        Cursor cursorEvent = sqldb.query(EventDatabaseHelper.EVENT_TABLE_NAME,
+                new String[]{EventDatabaseHelper.UID, EventDatabaseHelper.EVENTTYPE,
+                        EventDatabaseHelper.COMMENTARY},
+                EventDatabaseHelper.UID + "= ?", new String[]{String.valueOf(id)},
+                null, null, null);
+        while (cursorEvent.moveToNext()){
+            int eventId = cursorEvent.getInt(cursorEvent.getColumnIndex(EventDatabaseHelper.UID));
+            String typeOfEvent = cursorEvent.getString(cursorEvent.getColumnIndex(EventDatabaseHelper.EVENTTYPE));
+            String commentary = cursorEvent.getString(cursorEvent.getColumnIndex(EventDatabaseHelper.COMMENTARY));
+            Event event = new Event(eventId, typeOfEvent, commentary);
+            return  event;
+        }
+        return  null;
+    }
 }

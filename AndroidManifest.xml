@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="16" />
 
     <application
@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".AddEventActivity"
             	  android:label="@string/app_name" />
+        <activity android:name=".ShowSingleEventActivity"/>
     </application>
 
 </manifest>

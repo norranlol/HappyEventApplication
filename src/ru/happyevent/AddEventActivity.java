@@ -1,5 +1,6 @@
 package ru.happyevent;
 
+import android.content.Intent;
 import ru.dao.EventDAO;
 import ru.dao.EventDatabaseHelper;
 import android.app.Fragment;
@@ -156,6 +157,8 @@ public class AddEventActivity extends ActionBarActivity {
                     whomEditText.setText("");
                     dateEditText.setText("");
                     commentaryEditText.setText("");
+                    Intent goToList = new Intent(AddEventActivity.this, ListOfEventsActivity.class);
+                    startActivity(goToList);
 				}
 			}
 		});
@@ -211,6 +214,8 @@ public class AddEventActivity extends ActionBarActivity {
                         whomEditText.setText("");
                         dateEditText.setText("");
                         commentaryEditText.setText("");
+                        Intent goToList = new Intent(AddEventActivity.this, ListOfEventsActivity.class);
+                        startActivity(goToList);
 					}
 				}
 			});
@@ -274,6 +279,8 @@ public class AddEventActivity extends ActionBarActivity {
                         titleEditText.setText("");
                         dateEditText.setText("");
                         commentaryEditText.setText("");
+                        Intent goToList = new Intent(AddEventActivity.this, ListOfEventsActivity.class);
+                        startActivity(goToList);
                     }
 				}
 			});
@@ -341,6 +348,8 @@ public class AddEventActivity extends ActionBarActivity {
                     eventDAO.insertInHolidayTable("Праздник", commentary, selectedItemTitle, dateOfHoliday, sqldb);
                     spinner.setSelection(0, true);
                     commentaryEditText.setText("");
+                    Intent goToList = new Intent(AddEventActivity.this, ListOfEventsActivity.class);
+                    startActivity(goToList);
                 }
             }
 		});
