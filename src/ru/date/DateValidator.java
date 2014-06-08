@@ -101,11 +101,4 @@ public class DateValidator {
 			return false;
 		else return true;
 	}
-	
-	public boolean validateDatesOnAfter(DateStorer dateStorer) {
-		if (!dateStorer.getDateTimeFuture().isAfter(dateStorer.getDateTimeCurrent()))
-			return false;
-		return true;
-	}
-	
 }

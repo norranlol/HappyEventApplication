@@ -81,5 +81,26 @@
                 android:layout_gravity="center_horizontal"
                 android:text=""/>
 
+        <TextView
+                android:id="@+id/textViewTimeLostLabelCustomEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dip"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/lost_time"
+                android:textColor="@android:color/holo_blue_dark"
+                />
+
+        <TextView
+                android:id="@+id/textViewTimeLostFieldCustomEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:inputType="textMultiLine"
+                android:text=""/>
+
     </LinearLayout>
  </ScrollView>

@@ -35,4 +35,5 @@
     <string name="type_event_customevent">Другое событие</string>
     <string name="type_event_holiday">Праздник</string>
     <string name="which_type_of_holiday">Какой?</string>
+    <string name="lost_time">До наступления:</string>
 </resources>
